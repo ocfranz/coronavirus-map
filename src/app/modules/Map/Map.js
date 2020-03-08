@@ -1,8 +1,8 @@
 import React from 'react';
 import styled, { css } from 'styled-components'
-import ReactMapGL, {Marker} from 'react-map-gl';
+import ReactMapGL, {Marker, NavigationControl} from 'react-map-gl';
 import { useState } from 'react';
-
+import MapMarker from './marker.png';
 const MapStyle = styled.div`
     width: 100%;
     height: 100%;
@@ -25,12 +25,15 @@ const Map = ({data})=>{
                 key={index} 
                 latitude={item.attributes.Lat} 
                 longitude={item.attributes.Long_}>
-                    <span>{item.attributes.Country_Region}</span>
+                    <img src={MapMarker} alt="map-marker"/>
                 </Marker>
             )
         });
         return markers;
     }   
+    const handleOnMarkerClick = ()=>{
+        
+    }
     return(
         <MapStyle>
             <ReactMapGL
@@ -41,6 +44,9 @@ const Map = ({data})=>{
                 {
                     setMarkers(data)
                 }
+                <div style={{position: 'absolute', right: 0}}>
+                    <NavigationControl />
+                </div>
             </ReactMapGL>
         </MapStyle>
     );
